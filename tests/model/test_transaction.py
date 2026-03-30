@@ -29,3 +29,13 @@ def test_withdraw_cash_from_atm(transaction):
     transaction.withdraw_cash_from_atm(300)
     assert transaction.atm.stock == 600
     
+    
+def test_debit_from_account(transaction):
+    transaction.debit_from_account(100)
+    assert transaction.bank_account.balance == 800
+    
+    transaction.debit_from_account(600)
+    assert transaction.bank_account.balance == 200
+    
+    transaction.debit_from_account(200)
+    assert transaction.bank_account.balance == 0
