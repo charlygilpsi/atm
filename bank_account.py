@@ -1,21 +1,3 @@
-"""
-Para   resolver   este   problema   de   forma   orientada   a   objetos,   se   deben 
-implementar las siguientes tres clases:
-1.CuentaBancaria:
-•Responsabilidad: Almacenar el saldo del cliente y el número de 
-cuenta.
-•Métodos clave: consultarSaldo(), debitar(monto).
-2.CajeroAutomatico:
-•Responsabilidad:  Gestionar   el   dinero   físico   disponible   en   la 
-máquina y procesar la transacción.
-•Métodos   clave:  validarEfectivoDisponible(monto), 
-retirarEfectivo(monto).
-3.Transaccion (Clase Controladora):
-•Responsabilidad:  Orquestar   la   interacción   entre   la 
-CuentaBancaria y el CajeroAutomatico. Contiene la lógica principal 
-(los "if/else") para aprobar o rechazar el retiro basándose en las 
-reglas mencionadas.
-"""
 class BankAccount:
     def __init__(self, account_id: int, client_id: int, account_number: int, balance: int) -> None:
         self._account_id = account_id
