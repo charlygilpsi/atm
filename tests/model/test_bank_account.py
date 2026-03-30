@@ -16,3 +16,15 @@ def test_constructor(bank_account):
 
 def test_check_balance(bank_account):
     assert bank_account.check_balance() == 1000
+    assert bank_account.check_balance() != 100000
+    
+
+def test_debit(bank_account):
+    bank_account.debit(100)
+    assert bank_account.check_balance() == 900
+    
+    bank_account.debit(500)
+    assert bank_account.check_balance() == 400
+    
+    bank_account.debit(400)
+    assert bank_account.check_balance() == 0
