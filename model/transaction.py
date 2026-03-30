@@ -1,5 +1,5 @@
-from atm import ATM
-from bank_account import BankAccount
+from model.atm import ATM
+from model.bank_account import BankAccount
 
 class Transaction:
     def __init__(self, atm: ATM, bank_account: BankAccount) -> None:
