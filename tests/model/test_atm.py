@@ -20,3 +20,14 @@ def test_constructor(atm):
 ])
 def test_validate_stock_available(atm, amount, expected_result):
     assert atm.validate_stock_available(amount) == expected_result
+    
+
+def test_withdraw_cash(atm):
+    atm.withdraw_cash(800)
+    assert atm.stock == 200
+    
+    atm.withdraw_cash(100)
+    assert atm.stock == 100
+    
+    atm.withdraw_cash(100)
+    assert atm.stock == 0
