@@ -39,3 +39,33 @@ def test_debit_from_account(transaction):
     
     transaction.debit_from_account(200)
     assert transaction.bank_account.balance == 0
+    
+
+@pytest.mark.parametrize("amount, expected_result", [
+    (300, True),
+    (500, True),
+    (1100, False),
+    (5000, False)
+])
+def test_validate_withdraw_cash_from_atm(transaction, amount, expected_result):
+    assert transaction.validate_withdraw_cash_from_atm(amount) == expected_result
+    
+
+@pytest.mark.parametrize("amount, expected_result", [
+    (300, True),
+    (500, True),
+    (950, False),
+    (1100, False)
+])
+def test_validate_debit_from_account(transaction, amount, expected_result):
+    assert transaction.validate_debit_from_account(amount) == expected_result
+    
+
+@pytest.mark.parametrize("amount, expected_result", [
+    (10, True),
+    (20, True),
+    (5, False),
+    (10.5, False)
+])
+def test_validate_amount_is_multiple_of_ten(transaction, amount, expected_result):
+    assert transaction.validate_amount_is_multiple_of_ten(amount) == expected_result
