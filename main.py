@@ -9,7 +9,7 @@ def caso_de_uso(transaccion: Transaction, cantidad: int):
     
     print(f"\n- Saldo inicial en la cuenta: {transaccion.bank_account.check_balance()} euros.")
     print(f"- Saldo inicial en el cajero: {transaccion.atm.stock} euros.")
-    print(f"- Cantidad introducidad para retirar dinero: {cantidad} euros")
+    print(f"- Cantidad introducida para retirar dinero: {cantidad} euros")
     if not transaccion.validate_amount_is_multiple_of_ten(cantidad):
         print("\nERROR: La cantidad introducida no es múltiplo de 10.")
         multiplo_de_10 = False
