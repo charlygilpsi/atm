@@ -28,3 +28,13 @@ def test_debit(bank_account):
     
     bank_account.debit(400)
     assert bank_account.check_balance() == 0
+    
+
+@pytest.mark.parametrize("amount, expected_result", [
+    (100, True),
+    (500, True),
+    (1200, False),
+    (1001, False)
+])
+def test_validate_balance_available(bank_account, amount, expected_result):
+    assert bank_account.validate_balance_available(amount) == expected_result
