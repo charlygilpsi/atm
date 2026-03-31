@@ -26,8 +26,8 @@ def caso_de_uso(transaccion: Transaction) -> str:
                 no_superado_limite_de_cuenta = False
     
     if multiplo_de_10 and no_superado_limite_de_cajero and no_superado_limite_de_cuenta:
-        transaccion.atm.withdraw_cash(transaccion.amount)
-        transaccion.bank_account.debit(transaccion.amount)
+        transaccion.withdraw_cash_from_atm()
+        transaccion.debit_from_account()
         
         print("\nTransacción realizada con éxito.")
         print(f"\nSaldo en el cajero después de la transacción: {transaccion.atm.stock} euros.")
