@@ -74,7 +74,8 @@ class Transaction:
         Args:
             amount (int): New amount of cash to withdraw from the ATM and the bank account.
         """
-
+        self._amount = amount
+        
 
     def withdraw_cash_from_atm(self) -> None:
         """Withdraws cash from the ATM."""
