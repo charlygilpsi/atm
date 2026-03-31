@@ -95,12 +95,12 @@ class BankAccount:
 
 
     def validate_balance_available(self, amount: int) -> bool:
-        """Validates if there is sufficient balance.
+        """Validates if there is enough balance.
 
         Args:
             amount (int): Amount to verify.
 
         Returns:
-            bool: True if sufficient balance exists, False otherwise.
+            bool: True if enough balance exists, False otherwise.
         """
         return self.balance - amount >= 0

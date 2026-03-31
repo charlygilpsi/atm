@@ -31,13 +31,13 @@ class ATM:
 
 
     def validate_stock_available(self, amount: int) -> bool:
-        """Validates if there is sufficient cash in the ATM.
+        """Validates if there is enough cash in the ATM.
 
         Args:
             amount (int): Amount to verify.
 
         Returns:
-            bool: True if sufficient cash exists, False otherwise.
+            bool: True if enough cash exists, False otherwise.
         """
         return self.stock - amount >= 0
 
