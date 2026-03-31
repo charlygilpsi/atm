@@ -16,11 +16,6 @@ class BankAccount:
         return self._client_id
     
     
-    @client_id.setter
-    def client_id(self, client_id: int) -> None:
-        self._client_id = client_id
-    
-    
     @property
     def account_number(self) -> int:
         return self._account_number

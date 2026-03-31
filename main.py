@@ -2,7 +2,7 @@ from model.atm import ATM
 from model.bank_account import BankAccount
 from model.transaction import Transaction
 
-def caso_de_uso(transaccion: Transaction, cantidad: int):
+def caso_de_uso(transaccion: Transaction, cantidad: int) -> str:
     multiplo_de_10 = True
     no_superado_limite_de_cajero = True
     no_superado_limite_de_cuenta = True
@@ -10,6 +10,7 @@ def caso_de_uso(transaccion: Transaction, cantidad: int):
     print(f"\n- Saldo inicial en la cuenta: {transaccion.bank_account.check_balance()} euros.")
     print(f"- Saldo inicial en el cajero: {transaccion.atm.stock} euros.")
     print(f"- Cantidad introducida para retirar dinero: {cantidad} euros")
+    
     if not transaccion.validate_amount_is_multiple_of_ten(cantidad):
         print("\nERROR: La cantidad introducida no es múltiplo de 10.")
         multiplo_de_10 = False
@@ -66,5 +67,5 @@ caso_de_uso(transaccion_3, cantidad)
 
 print("\n\n################################################")
 print("CASO DE USO DONDE HAY ERROR POR LÍMITE DE CUENTA")
-print("################################################\n")
+print("################################################")
 caso_de_uso(transaccion_2, cantidad)
