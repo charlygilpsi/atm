@@ -2,32 +2,32 @@ from model.atm import ATM
 from model.bank_account import BankAccount
 from model.transaction import Transaction
 
-def caso_de_uso(transaccion: Transaction, cantidad: int) -> str:
+def caso_de_uso(transaccion: Transaction) -> str:
     multiplo_de_10 = True
     no_superado_limite_de_cajero = True
     no_superado_limite_de_cuenta = True
     
     print(f"\n- Saldo inicial en la cuenta: {transaccion.bank_account.check_balance()} euros.")
     print(f"- Saldo inicial en el cajero: {transaccion.atm.stock} euros.")
-    print(f"- Cantidad introducida para retirar dinero: {cantidad} euros")
+    print(f"- Cantidad introducida para retirar dinero: {transaccion.amount} euros")
     
-    if not transaccion.validate_amount_is_multiple_of_ten(cantidad):
+    if not transaccion.validate_amount_is_multiple_of_ten():
         print("\nERROR: La cantidad introducida no es múltiplo de 10.")
         multiplo_de_10 = False
     else:
         
-        if not transaccion.validate_withdraw_cash_from_atm(cantidad):
+        if not transaccion.validate_withdraw_cash_from_atm():
             print("\nERROR: No hay suficiente dinero en el cajero.")
             no_superado_limite_de_cajero = False
         else:
             
-            if not transaccion.validate_debit_from_account(cantidad):
+            if not transaccion.validate_debit_from_account():
                 print("\nERROR: No hay suficiente dinero en la cuenta.")
                 no_superado_limite_de_cuenta = False
     
     if multiplo_de_10 and no_superado_limite_de_cajero and no_superado_limite_de_cuenta:
-        transaccion.atm.withdraw_cash(cantidad)
-        transaccion.bank_account.debit(cantidad)
+        transaccion.atm.withdraw_cash(transaccion.amount)
+        transaccion.bank_account.debit(transaccion.amount)
         
         print("\nTransacción realizada con éxito.")
         print(f"\nSaldo en el cajero después de la transacción: {transaccion.atm.stock} euros.")
@@ -36,36 +36,37 @@ def caso_de_uso(transaccion: Transaction, cantidad: int) -> str:
                 
 cajero_automatico_1 = ATM(1000)
 cuenta_1 = BankAccount(1, 1, 123, 900)
-transaccion_1 = Transaction(cajero_automatico_1, cuenta_1)
+transaccion_1 = Transaction(cajero_automatico_1, cuenta_1, 500)
 
 cajero_automatico_2 = ATM(500)
 cuenta_2 = BankAccount(1, 1, 123, 400)
-transaccion_2 = Transaction(cajero_automatico_2, cuenta_2)
+transaccion_2 = Transaction(cajero_automatico_2, cuenta_2, 15)
 
 cajero_automatico_3 = ATM(400)
 cuenta_3 = BankAccount(1, 1, 123, 500)
-transaccion_3 = Transaction(cajero_automatico_3, cuenta_3)
+transaccion_3 = Transaction(cajero_automatico_3, cuenta_3, 500)
 
-cantidad = 500
-cantidad_2 = 15
+cajero_automatico_4 = ATM(600)
+cuenta_4 = BankAccount(1, 1, 123, 500)
+transaccion_4 = Transaction(cajero_automatico_4, cuenta_4, 600)
 
 
 print("\n\n################################")
 print("CASO DE USO DONDE NO HAY ERRORES")
 print("################################")
-caso_de_uso(transaccion_1, cantidad)
+caso_de_uso(transaccion_1)
 
 print("\n\n#############################################")
 print("CASO DE USO DONDE HAY ERROR POR MÚLTPLO DE 10")
 print("#############################################")
-caso_de_uso(transaccion_1, cantidad_2)
+caso_de_uso(transaccion_2)
 
 print("\n\n################################################")
 print("CASO DE USO DONDE HAY ERROR POR LÍMITE DE CAJERO")
 print("################################################")
-caso_de_uso(transaccion_3, cantidad)
+caso_de_uso(transaccion_3)
 
 print("\n\n################################################")
 print("CASO DE USO DONDE HAY ERROR POR LÍMITE DE CUENTA")
 print("################################################")
-caso_de_uso(transaccion_2, cantidad)
+caso_de_uso(transaccion_4)
