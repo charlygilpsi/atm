@@ -4,15 +4,17 @@ from model.atm import ATM
 class Transaction:
     """Transaction that coordinates withdrawals between ATM and bank account."""
 
-    def __init__(self, atm: ATM, bank_account: BankAccount) -> None:
+    def __init__(self, atm: ATM, bank_account: BankAccount, amount: int) -> None:
         """Initializes a transaction with ATM and account.
 
         Args:
             atm (ATM): ATM used in the transaction.
             bank_account (BankAccount): Bank account affected.
+            amount (int): Amount of cash to withdraw from the ATM and the bank account.
         """
         self._atm = atm
         self._bank_account = bank_account
+        self._amount = amount
 
 
     @property
@@ -53,57 +55,47 @@ class Transaction:
             bank_account (BankAccount): New bank account.
         """
         self._bank_account = bank_account
-
-
-    def withdraw_cash_from_atm(self, amount: int) -> None:
-        """Withdraws cash from the ATM.
-
-        Args:
-            amount (int): Amount to withdraw.
-        """
-        self.atm.withdraw_cash(amount)
-
-
-    def debit_from_account(self, amount: int) -> None:
-        """Debits funds from the account.
-
-        Args:
-            amount (int): Amount to debit.
-        """
-        self.bank_account.debit(amount)
-
-
-    def validate_withdraw_cash_from_atm(self, amount) -> bool:
-        """Validates if the ATM has enough cash.
-
-        Args:
-            amount (int): Amount to verify.
+        
+    
+    @property
+    def amount(self) -> int:
+        """Gets the associated amount.
 
         Returns:
-            bool: True if enough stock exists, False otherwise.
+            amount: Amount of cash to withdraw from the ATM and the bank account.
         """
-        return self.atm.validate_stock_available(amount)
-
-
-    def validate_debit_from_account(self, amount) -> bool:
-        """Validates if the account has enough balance.
+        return self._amount
+    
+    
+    @amount.setter
+    def amount(self, amount: int) -> None:
+        """Sets the amount of cash to withdraw from the ATM and the bank account.
 
         Args:
-            amount (int): Amount to verify.
-
-        Returns:
-            bool: True if enough balance exists, False otherwise.
+            amount (int): New amount of cash to withdraw from the ATM and the bank account.
         """
-        return self.bank_account.validate_balance_available(amount)
 
 
-    def validate_amount_is_multiple_of_ten(self, amount) -> bool:
-        """Validates if the amount is a multiple of ten.
+    def withdraw_cash_from_atm(self) -> None:
+        """Withdraws cash from the ATM."""
+        self.atm.withdraw_cash(self.amount)
 
-        Args:
-            amount (int): Amount to verify.
 
-        Returns:
-            bool: True if it is a multiple of ten, False otherwise.
-        """
-        return amount % 10 == 0
+    def debit_from_account(self) -> None:
+        """Debits funds from the account."""
+        self.bank_account.debit(self.amount)
+
+
+    def validate_withdraw_cash_from_atm(self) -> bool:
+        """Validates if the ATM has enough cash."""
+        return self.atm.validate_stock_available(self.amount)
+
+
+    def validate_debit_from_account(self) -> bool:
+        """Validates if the account has enough balance."""
+        return self.bank_account.validate_balance_available(self.amount)
+
+
+    def validate_amount_is_multiple_of_ten(self) -> bool:
+        """Validates if the amount is a multiple of ten."""
+        return self.amount % 10 == 0
